@@ -166,14 +166,12 @@ class PrioritizedSweepingValueIterationAgent(ValueIterationAgent):
                         if prob > 0:
                             predecessors[nextState].add(state)
 
-
         # setup priority queue for all states based on their highest diff in greedy update
         priority_queue = util.PriorityQueue()
         for state in self.mdp.getStates():
             if not self.mdp.isTerminal(state):
                 diff = abs(self.values[state] - self.getGreedyUpdate(state))
                 priority_queue.push(state, -diff)
-
 
         # run priority sweeping value iteration:
         for i in range(self.iterations):
@@ -189,7 +187,6 @@ class PrioritizedSweepingValueIterationAgent(ValueIterationAgent):
                     diff = abs(self.values[predecessor] - self.getGreedyUpdate(predecessor))
                     if diff > self.theta:
                         priority_queue.update(predecessor, -diff)
-
 
 
 class AsynchronousValueIterationAgent:
